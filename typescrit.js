@@ -16,10 +16,16 @@ var __extends = (this && this.__extends) || (function () {
 // class in typescript
 {
     var Animal = /** @class */ (function () {
-        function Animal(n) {
+        //short hand code
+        function Animal(name) {
+            this.name = name;
             //khi goi class thi ham nay se goi truoc tien            
-            this.name = n;
         }
+        // ở trên là cách viết ngắn của đoạn code ở dưới
+        // public name: string
+        // constructor(n: string) {
+        //     this.name = n
+        // }
         Animal.prototype.getName = function () {
             console.log('It is ' + this.name);
         };
@@ -57,7 +63,8 @@ var __extends = (this && this.__extends) || (function () {
     blackCat.getName();
     blackCat.eat();
     blackCat.sleep();
-    //over write  lai cac phuong cua class cha.
+    //over write lai cac phuong cua class cha.
+    //OVERRIDING METHOD: một class có thể định nghĩa và khái báo lại các method của class cha của nó.
     var TheDog = /** @class */ (function (_super) {
         __extends(TheDog, _super);
         function TheDog() {
@@ -79,6 +86,7 @@ var __extends = (this && this.__extends) || (function () {
         TheDog.prototype.modifierProtected = function () {
             console.log('Go to the bed');
         };
+        // modifier static co the goi truc tiep thong qua name cua class ma khong can khoi tao class do 
         TheDog.origin = { x: 10, y: 30 };
         return TheDog;
     }(Animal));
@@ -86,4 +94,34 @@ var __extends = (this && this.__extends) || (function () {
     theDog_1.getName();
     theDog_1.sleep();
     console.log(TheDog.origin);
+    // ABSTRACT CLASS : sinh ra với mục đích thể hiện rõ ràng tính kế thừa
+    //abstract class co the implements >1 interface
+    var Person = /** @class */ (function () {
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.getName = function () {
+            return this.name;
+        };
+        return Person;
+    }());
+    //Student khi ke thua person thi phai dinh lai toan bo cac method trieu tuong trong class person (getAge), nieu khong type script se bao loi
+    var Student = /** @class */ (function (_super) {
+        __extends(Student, _super);
+        function Student() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Student.prototype.getAge = function () {
+            return 'String';
+        };
+        return Student;
+    }(Person));
 }
+function newClass(aa) {
+    var defaultValue = { color: 'red', width: 30 };
+    if (aa.color)
+        defaultValue.color = aa.color;
+    return defaultValue;
+}
+var callFN = newClass({ color: 'purple', width: 20 });

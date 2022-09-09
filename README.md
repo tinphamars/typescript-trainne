@@ -1,2 +1,2 @@
 # typescript-trainne
-git install
+My name is Tin

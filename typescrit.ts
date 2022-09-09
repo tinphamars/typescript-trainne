@@ -1,11 +1,16 @@
 // class in typescript
 {
     class Animal {
-        name: string
-        constructor(n: string) {
+        //short hand code
+        constructor(public name: string) {
             //khi goi class thi ham nay se goi truoc tien            
-            this.name = n
         }
+        // ở trên là cách viết ngắn của đoạn code ở dưới
+        // public name: string
+        // constructor(n: string) {
+        //     this.name = n
+        // }
+
         getName(this: Animal) {
             console.log('It is ' + this.name)
         }
@@ -28,7 +33,6 @@
     theDog.getName()
     theDog.run()
 
-
     // INHERITANCE (tinh ke thua)
     // child class co nhung tinh chat va thuoc tinh cua class cha
     class TheCat extends Animal {
@@ -43,7 +47,8 @@
     blackCat.sleep()
 
 
-    //over write  lai cac phuong cua class cha.
+    //over write lai cac phuong cua class cha.
+    //OVERRIDING METHOD: một class có thể định nghĩa và khái báo lại các method của class cha của nó.
     class TheDog extends Animal {
         sleep() {
             console.log('the dog is not sleep')
@@ -70,4 +75,41 @@
     theDog_1.sleep()
     console.log(TheDog.origin)
 
-}   
+
+    // ABSTRACT CLASS : sinh ra với mục đích thể hiện rõ ràng tính kế thừa
+    //abstract class co the implements >1 interface
+    abstract class Person {
+        address?: string
+        constructor(protected name: string, protected age: number) { }
+
+        getName() {
+            return this.name
+        }
+
+        abstract getAge(): string
+    }
+
+    //Student khi ke thua person thi phai dinh lai toan bo cac method trieu tuong trong class person (getAge), nieu khong type script se bao loi
+    class Student extends Person {
+        getAge(): string {
+            return 'String'
+        }
+    }
+
+}
+
+//thiết lập một kiểu chung cho parameters and giá trị trả về của hàm
+interface PropType {
+    color: string
+    width: number
+}
+
+function newClass(aa: PropType): PropType {
+    let defaultValue = { color: 'red', width: 30 }
+    if (aa.color)
+        defaultValue.color = aa.color
+    return defaultValue
+}
+
+let callFN = newClass({ color: 'purple', width: 20 })
+
