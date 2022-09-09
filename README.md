@@ -1,0 +1,2 @@
+# typescript-trainne
+git install
